@@ -39,6 +39,7 @@ Alternative: Release the GPIO 00 and pull the Reset pin low and release.
 
 Press enter, and type >>> print('hello')
 Press enter again, you should see 'hello' as output.
+To quit, hold down [Ctrl] and press [X] then [A].
 
 There's also the WebREPL that can be used over a Wi-Fi connection.
 The ESP8266 launches as a WiFi AP after the initialization by default.
