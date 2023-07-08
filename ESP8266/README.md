@@ -44,5 +44,22 @@ To quit, hold down [Ctrl] and press [X] then [A].
 There's also the WebREPL that can be used over a Wi-Fi connection.
 The ESP8266 launches as a WiFi AP after the initialization by default.
 
+# 7. Create and execute programs
 When the ESP8266 starts up, it will first execute boot.py and then main.py (if they exist).
 These can be created and populated with the code that should be run when the device starts up.
+
+The ESP8266 filesystem can be mounted on the RPi as a USB memory device.
+For example, with mpremote: https://github.com/micropython/micropython/tree/master/tools/mpremote
+
+Note: The program fails to identify /dev/ttyS0
+To have it being used, comment out lines 37-45 and add:
+> state.transport = SerialTransport("/dev/ttyS0", baudrate=115200)
+> return
+
+You can verify that /dev/ttyS0 can now be used to connect:
+> $ python3 mpremote.py connect /dev/ttyS0
+
+Mpremote commands: https://pypi.org/project/mpremote/
+For example, to list all files:
+> $ python3 mpremote.py fs ls
+
