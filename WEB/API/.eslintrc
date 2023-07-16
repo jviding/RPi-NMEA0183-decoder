@@ -12,7 +12,7 @@
     "prettier"
   ],
   "rules": {
-    "no-console": 1,
+    "no-console": 0, // TODO: Use to check at times where console is used
     "no-loops/no-loops": 1,
     "prettier/prettier": 2
   },
