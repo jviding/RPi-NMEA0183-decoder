@@ -21,6 +21,12 @@ Add the username and password to /secrets in project root.
 Add tables by running the ./init-db.sql script:
 > $ psql -h localhost -U <USER> -d <DB-NAME> -a -f init-db.sql
 
+# Cheat sheet
 
-sudo -U postgres -d <DB-NAME> -a -f init-db.sql
+When connected:
+> # \l - list databases
+> # \c <db-name> - choose a database
+> # \dt - list tables in a database
 
+Then, run queries as usual:
+> # SELECT <column> FROM <table> ...
