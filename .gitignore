@@ -1,5 +1,7 @@
 ## Custom
-private-key.json
+secrets/*
+WEB/API/build
+WEB/API/node_modules
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
