@@ -25,16 +25,18 @@ export default class Boats {
 
   create = (req: Request, res: Response) => {
     // TODO: Name/Type min max length
-    const name = 'Black Pearl'
-    const type = 'X-99'
-    const userId = 1
+    // TODO: Change to reading user ID from Cookie !!
+    const { name, type, userId } = req.body
+    //const name = 'Black Pearl'
+    //const type = 'X-99'
+    //const userId = 1
     return this.database.boats.create(name, type, userId).then(() => res.status(201).send())
   }
 
-  // getOne
-  // getAll
+  delete = (req: Request, res: Response) => {
+    const boatId = req.params.id
+    return this.database.boats.delete(boatId).then(() => res.status(204).send())
+  }
 
-  // create
-  // delete
   // update
 }

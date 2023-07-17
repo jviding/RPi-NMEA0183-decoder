@@ -31,6 +31,11 @@ export default class Boats {
       values: [name, type, userId]
     })
 
-  // delete
+  delete = (boatId: string) =>
+    this.database.query({
+      text: 'DELETE FROM boats WHERE id=$1',
+      values: [boatId]
+    })
+
   // update
 }
