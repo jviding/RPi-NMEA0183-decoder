@@ -24,14 +24,16 @@ export default class BoatTrips {
   getAll = (req: Request, res: Response) => this.database.trips.getAll().then((data) => res.send(data.rows))
 
   create = (req: Request, res: Response) => {
-    const name = 'Trip'
+    const { name, boatId } = req.body
     const timestamp = Date.now()
-    const boatId = 1
-    return this.database.trips.create(name, timestamp, boatId).then((data) => res.status(201).send(data.rows))
+    return this.database.trips.create(name, timestamp, boatId).then((data) => res.status(201).send(data.rows[0]))
   }
 
-  // getLatest ?
-  // create
-  // delete
-  // update
+  delete = (req: Request, res: Response) => {
+    const tripId = req.params.id
+    return this.database.trips.delete(tripId).then(() => res.status(204).send())
+  }
+
+  // TODO: getLatest ?
+  // TODO: update
 }

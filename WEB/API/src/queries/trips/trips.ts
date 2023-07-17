@@ -25,7 +25,9 @@ export default class Trips {
       values: []
     })
 
-  // getLatest -> highest trip_id, then search
+  // TODO: getLatest -> highest trip_id ?
+  // But need to know if continuing existing, i.e., <10min from latest nmea packet
+  // Do a search to nmea data...
 
   create = (name: string, timestamp: number, boatId: number) =>
     this.database.query({
@@ -33,9 +35,11 @@ export default class Trips {
       values: [name, timestamp, boatId]
     })
 
-  // getOne
-  // getAll
-  // create
-  // delete
-  // update
+  delete = (tripId: string) =>
+    this.database.query({
+      text: 'DELETE FROM trips WHERE id=$1',
+      values: [tripId]
+    })
+
+  // TODO: update
 }
