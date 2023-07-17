@@ -21,11 +21,12 @@ export default class Users {
 
   create = (req: Request, res: Response) => {
     // TODO: Username/Password min max length
-    const username = 'jasu4'
+    const username = 'jasu2'
     const password = 'pwd'
+    const email = 'empty'
     return bcrypt
       .hash(password, 10)
-      .then((hash: string) => this.database.users.create(username, hash))
+      .then((hash: string) => this.database.users.create(username, hash, email))
       .then(() => res.status(201).send())
   }
 
