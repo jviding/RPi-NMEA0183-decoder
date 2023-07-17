@@ -21,25 +21,32 @@ const app = express()
 const port = 8000
 
 const catchExceptions = (callback: Function) => // eslint-disable-line
-  (req: express.Request, res: express.Response) =>
+  (req: express.Request, res: express.Response) => // eslint-disable-line
     callback(req, res).catch((err: any) => res.send(err)) // eslint-disable-line
 // TODO: Log errors, or what?
 
-// BOATS
-// getOne
-// getAll
-// create
+// --- BOATS ---
+app.get('/boats', catchExceptions(api.boats.getAll))
+app.get('/boats/b-:id', catchExceptions(api.boats.getByID))
+app.get('/boats/u-:id', catchExceptions(api.boats.getByUser))
+app.get('/boats/post', catchExceptions(api.boats.create))
 // delete
 // update
 
-// USERS
+// --- USERS ---
 app.get('/users', catchExceptions(api.users.getAll))
 app.get('/users/:id', catchExceptions(api.users.getOne))
-app.post('/users', catchExceptions(api.users.create))
+app.get('/post/users', catchExceptions(api.users.create))
 app.delete('/users/:id', catchExceptions(api.users.delete))
 // update
 
-// NMEA
+// --- TRIPS ---
+app.get('/trips', catchExceptions(api.trips.getAll))
+app.get('/trips/t-:id', catchExceptions(api.trips.getByID))
+app.get('/trips/b-:id', catchExceptions(api.trips.getByBoat))
+app.get('/post/trips', catchExceptions(api.trips.create))
+
+// --- NMEA_DATA ---
 // get
 // save
 
