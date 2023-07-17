@@ -27,7 +27,7 @@ export default class Boats {
 
   create = (name: string, type: string, userId: number) =>
     this.database.query({
-      text: 'INSERT INTO boats(name, type, user_id) VALUES($1, $2, $3)',
+      text: 'INSERT INTO boats(name, type, user_id) VALUES($1, $2, $3) RETURNING id',
       values: [name, type, userId]
     })
 
