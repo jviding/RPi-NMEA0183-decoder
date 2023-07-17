@@ -24,5 +24,5 @@ export default class NmeaData {
     return this.database.nmea.save(timestamp, packet_type, packet_data, trip_id).then(() => res.status(201).send())
   }
 
-  // delete
+  // TODO: delete
 }

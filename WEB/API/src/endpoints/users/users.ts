@@ -33,5 +33,5 @@ export default class Users {
     return this.database.users.delete(userId).then(() => res.status(204).send())
   }
 
-  // update
+  // TODO: update
 }

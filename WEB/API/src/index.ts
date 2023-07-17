@@ -33,24 +33,25 @@ app.get('/boats/b-:id', catchExceptions(api.boats.getByID))
 app.get('/boats/u-:id', catchExceptions(api.boats.getByUser)) // TODO: change to /boats/my (?) and read from Cookie !!
 app.post('/boats', catchExceptions(api.boats.create))
 app.delete('/boats/:id', catchExceptions(api.boats.delete))
-// update
+// TODO: update boat
 
 // --- USERS ---
 app.get('/users', catchExceptions(api.users.getAll))
 app.get('/users/:id', catchExceptions(api.users.getOne)) // TODO: change to /users/me and read from Cookie !!
 app.post('/users', catchExceptions(api.users.create))
 app.delete('/users/:id', catchExceptions(api.users.delete)) // TODO: Admin function? How for users?
-// update
+// TODO: update user
 
 // --- TRIPS ---
 app.get('/trips', catchExceptions(api.trips.getAll))
 app.get('/trips/t-:id', catchExceptions(api.trips.getByID))
 app.get('/trips/b-:id', catchExceptions(api.trips.getByBoat))
-app.get('/post/trips', catchExceptions(api.trips.create))
+app.post('/trips', catchExceptions(api.trips.create))
+app.delete('/trips/:id', catchExceptions(api.trips.delete))
 
 // --- NMEA_DATA ---
-// get
-// save
+// TODO: get nmea
+// TODO: save nmea
 
 // TODO: app.use(isAuthenticated)
 // TODO: Collect HTTP logs?

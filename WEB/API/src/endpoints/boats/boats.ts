@@ -27,9 +27,6 @@ export default class Boats {
     // TODO: Name/Type min max length
     // TODO: Change to reading user ID from Cookie !!
     const { name, type, userId } = req.body
-    //const name = 'Black Pearl'
-    //const type = 'X-99'
-    //const userId = 1
     return this.database.boats.create(name, type, userId).then(() => res.status(201).send())
   }
 
@@ -38,5 +35,5 @@ export default class Boats {
     return this.database.boats.delete(boatId).then(() => res.status(204).send())
   }
 
-  // update
+  // TODO: update
 }
