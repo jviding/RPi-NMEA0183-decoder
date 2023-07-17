@@ -25,6 +25,8 @@ const catchExceptions = (callback: Function) => // eslint-disable-line
     callback(req, res).catch((err: any) => res.send(err)) // eslint-disable-line
 // TODO: Log errors, or what?
 
+app.use(express.json())
+
 // --- BOATS ---
 app.get('/boats', catchExceptions(api.boats.getAll))
 app.get('/boats/b-:id', catchExceptions(api.boats.getByID))
@@ -36,7 +38,7 @@ app.get('/boats/post', catchExceptions(api.boats.create))
 // --- USERS ---
 app.get('/users', catchExceptions(api.users.getAll))
 app.get('/users/:id', catchExceptions(api.users.getOne))
-app.get('/post/users', catchExceptions(api.users.create))
+app.post('/users', catchExceptions(api.users.create))
 app.delete('/users/:id', catchExceptions(api.users.delete))
 // update
 

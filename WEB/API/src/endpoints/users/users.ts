@@ -21,9 +21,7 @@ export default class Users {
 
   create = (req: Request, res: Response) => {
     // TODO: Username/Password min max length
-    const username = 'jasu2'
-    const password = 'pwd'
-    const email = 'empty'
+    const { username, password, email } = req.body
     return bcrypt
       .hash(password, 10)
       .then((hash: string) => this.database.users.create(username, hash, email))
