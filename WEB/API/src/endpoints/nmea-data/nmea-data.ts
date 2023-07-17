@@ -11,14 +11,17 @@ export default class NmeaData {
     this.database = database
   }
 
-  // get
+  getByTrip = (req: Request, res: Response) => {
+    const tripId = req.params.tripId
+    return this.database.nmea.getByTrip(tripId).then((data) => res.send(data.rows))
+  }
 
   save = (req: Request, res: Response) => {
     const timestamp = ''
-    const packet_type = '' // Needs to be resolved here! Create a function for it
+    const packet_type = '' // TODO: Needs to be resolved here! Create a function for it
     const packet_data = ''
-    const boat_id = ''
-    return this.database.nmea.save(timestamp, packet_type, packet_data, boat_id).then(() => res.status(201).send())
+    const trip_id = ''
+    return this.database.nmea.save(timestamp, packet_type, packet_data, trip_id).then(() => res.status(201).send())
   }
 
   // delete
