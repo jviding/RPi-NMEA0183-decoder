@@ -19,12 +19,11 @@ export default class Users {
       values: []
     })
 
-  create = (username: string, passwordHash: string) =>
+  create = (username: string, passwordHash: string, email: string) =>
     this.database.query({
-      text: 'INSERT INTO users(username, password_hash) VALUES($1, $2)',
-      values: [username, passwordHash]
+      text: 'INSERT INTO users(username, password_hash, email) VALUES($1, $2, $3)',
+      values: [username, passwordHash, email]
     })
-  // TODO: Require email upon creation?
 
   delete = (userId: string) =>
     this.database.query({
