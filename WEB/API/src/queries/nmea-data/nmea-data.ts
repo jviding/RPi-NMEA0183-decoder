@@ -7,11 +7,15 @@ export default class NmeaData {
     this.database = database
   }
 
-  // get
-
-  save = (timestamp: string, nmeaType: string, nmeaData: string, boatId: string) =>
+  getByTrip = (tripId: string) =>
     this.database.query({
-      text: 'INSERT INTO nmea_data(timestamp, packet_type, packet_data, boat_id) VALUES($1, $2, $3, $4)',
-      values: [timestamp, nmeaType, nmeaData, boatId]
+      text: 'SELECT timestamp, packet_type, packet_data FROM nmea_data WHERE trip_id=$1',
+      values: [tripId]
+    })
+
+  save = (timestamp: string, nmeaType: string, nmeaData: string, tripId: string) =>
+    this.database.query({
+      text: 'INSERT INTO nmea_data(timestamp, packet_type, packet_data, boat_id, trip_id) VALUES($1, $2, $3, $4)',
+      values: [timestamp, nmeaType, nmeaData, tripId]
     })
 }
