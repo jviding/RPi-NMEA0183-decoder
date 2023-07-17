@@ -12,12 +12,12 @@ export default class Boats {
   }
 
   getByID = (req: Request, res: Response) => {
-    const boatId = req.params.id
+    const boatId = req.params.boatId
     return this.database.boats.getByID(boatId).then((data) => res.send(data.rows))
   }
 
   getByUser = (req: Request, res: Response) => {
-    const userId = req.params.id
+    const userId = req.params.userId
     return this.database.boats.getByUser(userId).then((data) => res.send(data.rows))
   }
 
@@ -31,7 +31,7 @@ export default class Boats {
   }
 
   delete = (req: Request, res: Response) => {
-    const boatId = req.params.id
+    const boatId = req.params.boatId
     return this.database.boats.delete(boatId).then(() => res.status(204).send())
   }
 

@@ -13,7 +13,7 @@ export default class Users {
   }
 
   getOne = (req: Request, res: Response) => {
-    const userId = req.params.id
+    const userId = req.params.userId
     return this.database.users.getOne(userId).then((data) => res.send(data.rows))
   }
 
@@ -29,7 +29,7 @@ export default class Users {
   }
 
   delete = (req: Request, res: Response) => {
-    const userId = req.params.id
+    const userId = req.params.userId
     return this.database.users.delete(userId).then(() => res.status(204).send())
   }
 
