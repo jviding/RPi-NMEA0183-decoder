@@ -3,7 +3,7 @@ CREATE TABLE users (
   id INT GENERATED ALWAYS AS IDENTITY,
   username VARCHAR(255) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
-  email VARCHAR(255)
+  email VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE boats (
@@ -19,12 +19,11 @@ CREATE TABLE boats (
       ON DELETE CASCADE
 );
 
-CREATE TABLE nmea_data (
+CREATE TABLE trips (
   PRIMARY KEY(id),
   id INT GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR(255) NOT NULL,
   timestamp BIGINT NOT NULL,
-  packet_type VARCHAR(255) NOT NULL,
-  packet_data VARCHAR(255) NOT NULL,
   boat_id INT,
   -- Constraints --
   CONSTRAINT fk_boat_id
@@ -33,7 +32,21 @@ CREATE TABLE nmea_data (
       ON DELETE CASCADE
 );
 
-CREATE INDEX idx_nmea_data ON nmea_data (
-  boat_id,
+CREATE TABLE nmea_data (
+  PRIMARY KEY(id),
+  id INT GENERATED ALWAYS AS IDENTITY,
+  timestamp BIGINT NOT NULL,
+  packet_type VARCHAR(255) NOT NULL,
+  packet_data VARCHAR(255) NOT NULL,
+  trip_id INT,
+  -- Constraints --
+  CONSTRAINT fk_trip_id
+    FOREIGN KEY(trip_id)
+      REFERENCES trips(id)
+      ON DELETE CASCADE
+);
+
+CREATE INDEX idx_nmea_data_by_trip_id ON nmea_data (
+  trip_id,
   timestamp DESC
 );
