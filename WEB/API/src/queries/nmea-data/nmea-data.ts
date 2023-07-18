@@ -13,9 +13,9 @@ export default class NmeaData {
       values: [tripId]
     })
 
-  save = (timestamp: string, nmeaType: string, nmeaData: string, tripId: string) =>
+  create = (timestamp: string, nmeaType: string, nmeaData: string, tripId: string) =>
     this.database.query({
-      text: 'INSERT INTO nmea_data(timestamp, packet_type, packet_data, boat_id, trip_id) VALUES($1, $2, $3, $4)',
+      text: 'INSERT INTO nmea_data(timestamp, packet_type, packet_data, trip_id) VALUES($1, $2, $3, $4)',
       values: [timestamp, nmeaType, nmeaData, tripId]
     })
 }

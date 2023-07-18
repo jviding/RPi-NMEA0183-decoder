@@ -51,6 +51,8 @@ app.delete('/trips/:tripId', catchExceptions(api.trips.delete))
 // TODO: update trip
 
 // --- NMEA_DATA ---
+app.get('/nmea/:tripId', catchExceptions(api.nmea.getByTrip))
+app.post('/nmea', catchExceptions(api.nmea.create))
 // TODO: get nmea
 // TODO: save nmea
 
