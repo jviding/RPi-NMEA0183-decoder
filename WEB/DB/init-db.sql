@@ -11,7 +11,7 @@ CREATE TABLE boats (
   id INT GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(255) NOT NULL,
   type VARCHAR(255),
-  user_id INT,
+  user_id INT NOT NULL,
   -- Constraints --
   CONSTRAINT fk_user_id
     FOREIGN KEY(user_id)
@@ -24,7 +24,7 @@ CREATE TABLE trips (
   id INT GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(255) NOT NULL,
   timestamp BIGINT NOT NULL,
-  boat_id INT,
+  boat_id INT NOT NULL,
   -- Constraints --
   CONSTRAINT fk_boat_id
     FOREIGN KEY(boat_id)
@@ -38,7 +38,7 @@ CREATE TABLE nmea_data (
   timestamp BIGINT NOT NULL,
   packet_type VARCHAR(255) NOT NULL,
   packet_data VARCHAR(255) NOT NULL,
-  trip_id INT,
+  trip_id INT NOT NULL,
   -- Constraints --
   CONSTRAINT fk_trip_id
     FOREIGN KEY(trip_id)
