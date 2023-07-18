@@ -48,6 +48,7 @@ app.get('/trips/t-:tripId', catchExceptions(api.trips.getByID))
 app.get('/trips/b-:boatId', catchExceptions(api.trips.getByBoat))
 app.post('/trips', catchExceptions(api.trips.create))
 app.delete('/trips/:tripId', catchExceptions(api.trips.delete))
+// TODO: update trip
 
 // --- NMEA_DATA ---
 // TODO: get nmea
@@ -55,6 +56,8 @@ app.delete('/trips/:tripId', catchExceptions(api.trips.delete))
 
 // TODO: app.use(isAuthenticated)
 // TODO: Collect HTTP logs?
+// TODO: Cookies, CSRF, Headers, etc. ?
+// TODO: Login, forgot password
 
 // --- ADMIN --- // TODO: Admin site, move some of above functions here?
 
