@@ -5,12 +5,6 @@ import Queries from './queries/queries'
 import Endpoints from './endpoints/endpoints'
 //import dotenv => To read vars from ENV
 
-declare module 'express-session' {
-  interface SessionData {
-    user: string
-  }
-}
-
 // TODO: How to handle secrets/configs?
 // Use ENV? https://node-postgres.com/apis/client
 const postgresConfig = {
@@ -58,9 +52,14 @@ app.post('/boats', catchExceptions(api.boats.create))
 app.delete('/boats/:boatId', catchExceptions(api.boats.delete))
 // TODO: update boat
 
+// --- AUTH ---
+app.post('/login', catchExceptions(api.users.login))
+app.post('/logout', catchExceptions(api.users.logout))
+
 // --- USERS ---
 app.get('/users', catchExceptions(api.users.getAll))
-app.get('/users/:userId', catchExceptions(api.users.getOne)) // TODO: change to /users/me and read from Cookie !!
+app.get('/users/me', catchExceptions(api.users.getCurrent))
+app.get('/users/u-:userId', catchExceptions(api.users.getOne)) // TODO: change to /users/me and read from Cookie !!
 app.post('/users', catchExceptions(api.users.create))
 app.delete('/users/:userId', catchExceptions(api.users.delete)) // TODO: Admin function? How for users?
 // TODO: update user

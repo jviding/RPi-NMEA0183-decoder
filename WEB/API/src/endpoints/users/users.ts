@@ -1,7 +1,7 @@
 import express = require('express')
 import bcrypt = require('bcrypt')
 import Queries from '../../queries/queries'
-import { createSession } from './sessions'
+import { createSession, endSession } from './sessions'
 
 type Request = typeof express.request
 type Response = typeof express.response
@@ -13,6 +13,8 @@ export default class Users {
     this.database = database
   }
 
+  // --- AUTH ---
+
   login = (req: Request, res: Response) => {
     const { username, password } = req.body
     return this.database.users
@@ -22,14 +24,18 @@ export default class Users {
       .then(() => res.send())
   }
 
-  // login
-  // logout
-  // register
-  // change pwd
+  logout = (req: Request, res: Response) => endSession(req).then(() => res.status(204).send())
+
+  // --- USER ---
+
+  getCurrent = (req: Request, res: Response) => {
+    req.params.userId = req.session.userId || ''
+    return this.getOne(req, res)
+  }
 
   getOne = (req: Request, res: Response) => {
     const userId = req.params.userId
-    return this.database.users.getOne(userId).then(({ rows }) => res.send(rows))
+    return this.database.users.getOne(userId).then(({ rows }) => res.send(rows[0]))
   }
 
   getAll = (req: Request, res: Response) => this.database.users.getAll().then(({ rows }) => res.send(rows))
@@ -49,5 +55,6 @@ export default class Users {
     return this.database.users.delete(userId).then(() => res.status(204).send())
   }
 
-  // TODO: update
+  // TODO: update email
+  // TODO: update password
 }
