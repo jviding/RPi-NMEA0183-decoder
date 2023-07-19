@@ -1,5 +1,6 @@
 import express = require('express')
-//import bcrypt = require('bcrypt')
+import session = require('express-session')
+import sessionStore = require('connect-pg-simple')
 import Queries from './queries/queries'
 import Endpoints from './endpoints/endpoints'
 //import dotenv => To read vars from ENV
@@ -26,6 +27,22 @@ const catchExceptions = (callback: Function) => // eslint-disable-line
 // TODO: Log errors, or what?
 
 app.use(express.json())
+app.use(
+  // TODO: Add maxAge, sameSite, secure(?) - store: add errorLog
+  session({
+    store: new (sessionStore(session))({
+      pool: dbClient.pool,
+      tableName: 'user_sessions',
+      pruneSessionInterval: 600 // 10min
+    }),
+    secret: 'someSuperSecretInput', // TODO: Use env
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
+    name: 'Bisquit',
+    unset: 'destroy'
+  })
+)
 
 // --- BOATS ---
 app.get('/boats', catchExceptions(api.boats.getAll))
