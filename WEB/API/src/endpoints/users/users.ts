@@ -28,14 +28,14 @@ export default class Users {
 
   // --- USER ---
 
-  getCurrent = (req: Request, res: Response) => {
+  get = (req: Request, res: Response) => {
     req.params.userId = req.session.userId || ''
-    return this.getOne(req, res)
+    return this.getByID(req, res)
   }
 
-  getOne = (req: Request, res: Response) => {
+  getByID = (req: Request, res: Response) => {
     const userId = req.params.userId
-    return this.database.users.getOne(userId).then(({ rows }) => res.send(rows[0]))
+    return this.database.users.getByID(userId).then(({ rows }) => res.send(rows[0]))
   }
 
   getAll = (req: Request, res: Response) => this.database.users.getAll().then(({ rows }) => res.send(rows))

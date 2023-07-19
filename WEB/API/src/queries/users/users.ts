@@ -7,7 +7,7 @@ export default class Users {
     this.database = database
   }
 
-  getOne = (userId: string) =>
+  getByID = (userId: string) =>
     this.database.query({
       text: 'SELECT id, username, email FROM users WHERE id=$1',
       values: [userId]
