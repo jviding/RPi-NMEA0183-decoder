@@ -11,6 +11,11 @@ export default class Boats {
     this.database = database
   }
 
+  get = (req: Request, res: Response) => {
+    req.params.userId = req.session.userId || ''
+    return this.getByUser(req, res)
+  }
+
   getByID = (req: Request, res: Response) => {
     const boatId = req.params.boatId
     return this.database.boats.getByID(boatId).then(({ rows }) => res.send(rows))
@@ -25,8 +30,8 @@ export default class Boats {
 
   create = (req: Request, res: Response) => {
     // TODO: Name/Type min max length
-    // TODO: Change to reading user ID from Cookie !!
-    const { name, type, userId } = req.body
+    const { name, type } = req.body
+    const userId = req.session.userId || ''
     return this.database.boats.create(name, type, userId).then(({ rows }) => res.status(201).send(rows[0]))
   }
 

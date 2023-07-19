@@ -50,8 +50,9 @@ app.post('/logout', catchExceptions(api.users.logout))
 
 // --- BOATS ---
 app.get('/boats', catchExceptions(api.boats.getAll))
+app.get('/boats/my', catchExceptions(api.boats.get))
 app.get('/boats/b-:boatId', catchExceptions(api.boats.getByID))
-app.get('/boats/u-:userId', catchExceptions(api.boats.getByUser)) // TODO: change to /boats/my (?) and read from Cookie !!
+app.get('/boats/u-:userId', catchExceptions(api.boats.getByUser))
 app.post('/boats', catchExceptions(api.boats.create))
 app.delete('/boats/:boatId', catchExceptions(api.boats.delete))
 // TODO: update boat
