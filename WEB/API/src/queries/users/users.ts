@@ -19,6 +19,12 @@ export default class Users {
       values: []
     })
 
+  getUserPassword = (username: string) =>
+    this.database.query({
+      text: 'SELECT id, password_hash FROM users WHERE username=$1',
+      values: [username]
+    })
+
   create = (username: string, passwordHash: string, email: string) =>
     this.database.query({
       text: 'INSERT INTO users(username, password_hash, email) VALUES($1, $2, $3) RETURNING id',

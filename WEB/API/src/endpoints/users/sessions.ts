@@ -3,7 +3,7 @@ import express = require('express')
 type Request = typeof express.request
 //type Response = typeof express.response
 
-export function authenticate(req: Request, userId: string): Promise<boolean> {
+export function createSession(req: Request, userId: string): Promise<boolean> {
   return new Promise((resolve, reject) => {
     req.session.regenerate((err) => {
       if (err) reject(`Auth: Session regeneration failed for user ${userId}`)
