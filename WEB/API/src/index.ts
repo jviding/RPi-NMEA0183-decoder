@@ -5,6 +5,12 @@ import Queries from './queries/queries'
 import Endpoints from './endpoints/endpoints'
 //import dotenv => To read vars from ENV
 
+declare module 'express-session' {
+  interface SessionData {
+    user: string
+  }
+}
+
 // TODO: How to handle secrets/configs?
 // Use ENV? https://node-postgres.com/apis/client
 const postgresConfig = {
