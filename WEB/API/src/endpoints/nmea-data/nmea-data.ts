@@ -13,7 +13,7 @@ export default class NmeaData {
 
   getByTrip = (req: Request, res: Response) => {
     const tripId = req.params.tripId
-    return this.database.nmea.getByTrip(tripId).then((data) => res.send(data.rows))
+    return this.database.nmea.getByTrip(tripId).then(({ rows }) => res.send(rows))
   }
 
   create = (req: Request, res: Response) => {
