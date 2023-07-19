@@ -13,20 +13,20 @@ export default class BoatTrips {
 
   getByID = (req: Request, res: Response) => {
     const tripId = req.params.tripId
-    return this.database.trips.getByID(tripId).then((data) => res.send(data.rows))
+    return this.database.trips.getByID(tripId).then(({ rows }) => res.send(rows))
   }
 
   getByBoat = (req: Request, res: Response) => {
     const boatId = req.params.boatId
-    return this.database.trips.getByBoat(boatId).then((data) => res.send(data.rows))
+    return this.database.trips.getByBoat(boatId).then(({ rows }) => res.send(rows))
   }
 
-  getAll = (req: Request, res: Response) => this.database.trips.getAll().then((data) => res.send(data.rows))
+  getAll = (req: Request, res: Response) => this.database.trips.getAll().then(({ rows }) => res.send(rows))
 
   create = (req: Request, res: Response) => {
     const { name, boatId } = req.body
     const timestamp = Date.now()
-    return this.database.trips.create(name, timestamp, boatId).then((data) => res.status(201).send(data.rows[0]))
+    return this.database.trips.create(name, timestamp, boatId).then(({ rows }) => res.status(201).send(rows[0]))
   }
 
   delete = (req: Request, res: Response) => {
