@@ -1,6 +1,7 @@
 import express = require('express')
-import bcrypt = require('bcrypt')
 import Queries from '../../queries/queries'
+import { hash } from '../password'
+import { authenticate } from '../auth'
 
 type Request = typeof express.request
 type Response = typeof express.response
@@ -22,10 +23,9 @@ export default class Users {
   create = (req: Request, res: Response) => {
     // TODO: Username/Password min max length
     const { username, password, email } = req.body
-    return bcrypt
-      .hash(password, 10)
-      .then((hash: string) => this.database.users.create(username, hash, email))
-      .then(({ rows }) => this._createSession(req, rows[0].id))
+    return hash(password)
+      .then((hash) => this.database.users.create(username, hash, email))
+      .then(({ rows }) => authenticate(req, rows[0].id))
       .then(() => res.status(201).send())
   }
 
@@ -35,17 +35,4 @@ export default class Users {
   }
 
   // TODO: update
-
-  _createSession = (req: Request, userId: string) => {
-    return new Promise((resolve, reject) => {
-      req.session.regenerate((err) => {
-        if (err) reject(`Session regeneration failed for user ${userId}`)
-        req.session.user = userId
-        req.session.save((err) => {
-          if (err) reject(`Couldn't save the session for user ${userId}`)
-          resolve(true)
-        })
-      })
-    })
-  }
 }

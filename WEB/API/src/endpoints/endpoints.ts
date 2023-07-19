@@ -1,8 +1,12 @@
+//import express = require('express')
 import Queries from '../queries/queries'
 import Boats from './boats/boats'
 import Users from './users/users'
 import Trips from './trips/trips'
 import Nmea from './nmea-data/nmea-data'
+
+//type Request = typeof express.request
+//type Response = typeof express.response
 
 export default class Endpoints {
   boats: Boats
