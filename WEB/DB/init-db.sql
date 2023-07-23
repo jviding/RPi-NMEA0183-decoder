@@ -24,6 +24,7 @@ CREATE TABLE boats (
   id INT GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(255) NOT NULL,
   type VARCHAR(255),
+  token VARCHAR(255) NOT NULL,
   user_id INT NOT NULL,
   -- Constraints --
   CONSTRAINT fk_user_id
