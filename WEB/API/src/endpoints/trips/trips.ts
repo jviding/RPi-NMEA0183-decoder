@@ -11,6 +11,15 @@ export default class BoatTrips {
     this.database = database
   }
 
+  /*get = (req: Request, res: Response) => {
+    const tripId = req.params.tripId
+    return this.database.trips.getByID(tripId).then(({ rows }) => res.send(rows))
+  }*/
+  // TODO: Miten näytetään? Trip ei voi nyt hakea userId perusteella
+  // Access controls ongelma, vaikeampi validoida
+  // Samaan hakuun, että palauttaa veneet ja jokaisen veneen tripit?
+  // Pitää samalla miettiä, miten UI rakennetaan...
+
   getByID = (req: Request, res: Response) => {
     const tripId = req.params.tripId
     return this.database.trips.getByID(tripId).then(({ rows }) => res.send(rows))
