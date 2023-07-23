@@ -420,7 +420,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"timestamp\":\"{{nmea_timestamp}}\",\"packet\":{{nmea_packet}},\"tripId\":\"{{trip_id}}\"}",
+							"raw": "{\"timestamp\":\"{{nmea_timestamp}}\",\"packet\":{{nmea_packet}},\"tripId\":\"{{trip_id}}\", \"token\":\"\"}",
 							"options": {
 								"raw": {
 									"language": "json"
