@@ -30,6 +30,7 @@ export default class Boats {
 
   create = (req: Request, res: Response) => {
     // TODO: Name/Type min max length
+    // TODO: Create token
     const { name, type } = req.body
     const userId = req.session.userId || ''
     return this.database.boats.create(name, type, userId).then(({ rows }) => res.status(201).send(rows[0]))
@@ -41,4 +42,5 @@ export default class Boats {
   }
 
   // TODO: update
+  // TODO: rotate token?
 }
