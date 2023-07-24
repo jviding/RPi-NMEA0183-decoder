@@ -19,6 +19,12 @@ export default class Boats {
       values: [userId]
     })
 
+  getByToken = (token: string) =>
+    this.database.query({
+      text: 'SELECT id, name, type, token, user_id FROM boats WHERE token=$1',
+      values: [token]
+    })
+
   getAll = () =>
     this.database.query({
       text: 'SELECT id, name, type, token, user_id FROM boats',
