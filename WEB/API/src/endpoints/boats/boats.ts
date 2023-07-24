@@ -1,4 +1,5 @@
 import express = require('express')
+import crypto = require('crypto')
 import Queries from '../../queries/queries'
 
 type Request = typeof express.request
@@ -33,7 +34,9 @@ export default class Boats {
     // TODO: Create token
     const { name, type } = req.body
     const userId = req.session.userId || ''
-    return this.database.boats.create(name, type, userId).then(({ rows }) => res.status(201).send(rows[0]))
+    return this._createToken()
+      .then((token) => this.database.boats.create(name, type, token, userId))
+      .then(({ rows }) => res.status(201).send(rows[0]))
   }
 
   delete = (req: Request, res: Response) => {
@@ -43,4 +46,15 @@ export default class Boats {
 
   // TODO: update
   // TODO: rotate token?
+
+  // --- PRIVATE ---
+
+  _createToken = (): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buff) => {
+        if (err) reject('Boats: Token generation failed')
+        resolve(buff.toString('base64'))
+      })
+    })
+  }
 }

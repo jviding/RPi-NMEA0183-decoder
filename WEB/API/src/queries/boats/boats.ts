@@ -9,26 +9,26 @@ export default class Boats {
 
   getByID = (boatId: string) =>
     this.database.query({
-      text: 'SELECT id, name, type, user_id FROM boats WHERE id=$1',
+      text: 'SELECT id, name, type, token, user_id FROM boats WHERE id=$1',
       values: [boatId]
     })
 
   getByUser = (userId: string) =>
     this.database.query({
-      text: 'SELECT id, name, type, user_id FROM boats WHERE user_id=$1',
+      text: 'SELECT id, name, type, token, user_id FROM boats WHERE user_id=$1',
       values: [userId]
     })
 
   getAll = () =>
     this.database.query({
-      text: 'SELECT id, name, type, user_id FROM boats',
+      text: 'SELECT id, name, type, token, user_id FROM boats',
       values: []
     })
 
-  create = (name: string, type: string, userId: string) =>
+  create = (name: string, type: string, token: string, userId: string) =>
     this.database.query({
-      text: 'INSERT INTO boats(name, type, user_id) VALUES($1, $2, $3) RETURNING id',
-      values: [name, type, userId]
+      text: 'INSERT INTO boats(name, type, token, user_id) VALUES($1, $2, $3, $4) RETURNING id',
+      values: [name, type, token, userId]
     })
 
   delete = (boatId: string) =>
