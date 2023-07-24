@@ -13,6 +13,12 @@ export default class NmeaData {
       values: [tripId]
     })
 
+  getLatestByTrip = (tripId: string) =>
+    this.database.query({
+      text: 'SELECT MAX(timestamp) FROM nmea_data WHERE trip_id=$1',
+      values: [tripId]
+    })
+
   // TODO: Use node-cache? If consequtive writes exhaust the server
   // Test database speed with print(time) before and after the storage
   create = (timestamp: string, nmeaType: string, nmeaData: string, tripId: string) =>

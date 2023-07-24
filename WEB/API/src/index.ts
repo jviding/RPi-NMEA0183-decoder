@@ -69,6 +69,7 @@ app.delete('/users/:userId', catchExceptions(api.users.delete)) // TODO: Admin f
 app.get('/trips', catchExceptions(api.trips.getAll))
 app.get('/trips/t-:tripId', catchExceptions(api.trips.getByID))
 app.get('/trips/b-:boatId', catchExceptions(api.trips.getByBoat))
+app.get('/trips/b-:boatId/current', catchExceptions(api.trips.getCurrent))
 app.post('/trips', catchExceptions(api.trips.create))
 app.delete('/trips/:tripId', catchExceptions(api.trips.delete))
 // TODO: update trip
