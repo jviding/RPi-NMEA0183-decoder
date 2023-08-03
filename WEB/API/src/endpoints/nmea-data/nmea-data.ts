@@ -18,6 +18,8 @@ export default class NmeaData {
 
   // TODO: Use node-cache? If consequtive writes exhaust the server
   // Test database speed with print(time) before and after the storage
+  // TODO: Use connection: keep-alive, sockets, or something?
+  // Then generate a TCP session specific secret for continuous delivery
   create = (req: Request, res: Response) => {
     const { timestamp, packet, tripId, token } = req.body
     const packetType = 'None' // TODO: Resolve packet types here!
